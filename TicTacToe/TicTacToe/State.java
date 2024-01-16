@@ -20,19 +20,32 @@ public class State
             }
         }
         for (int col=0; col < Constants.BOARD_SIZE; col++) {
-            total = this.getBoardCell (col,0) + this.getBoardCell (col,1) + this.getBoardCell (col,2);
+            total = this.getBoardCell (0,col) + this.getBoardCell (col,1) + this.getBoardCell (2,col);
             if (total == -3 || total == 3) {
                 return true;
             }
         }
-        for (int row=0; row < Constants.BOARD_SIZE; row++) {
-            total = this.getBoardCell (0,0) + this.getBoardCell(1,1) + this.getBoardCell (2,2);
-            if (total 
+        total = getBoardCell(0,0) + getBoardCell(1,1) + getBoardCell(2,2);
+        if (total == -3 || total == 3) {
+            return true;
+        }
+        total = getBoardCell(0,2) + getBoardCell(1,1) + getBoardCell(2,0);
+        if (total == -3 || total == 3) {
+            return true;
+        } else {
+            return false;
         }
     }
 
     public boolean isTie() {
-        // You will write this code too!!
+        for (int row=0; row < Constants.BOARD_SIZE; row++) {
+            for (int col=0; col < Constants.BOARD_SIZE; col++) {
+                if (getBoardCell(row,col) == Constants.BLANK) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public int getameState() {
