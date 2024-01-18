@@ -55,7 +55,31 @@ public class State
     public void setGameState(int gameState) {
         this.gameState = gameState;
     }
+    
+    public int getWhoseMove() {
+        return this.whoseMove;
+    }
 
+    public void setWhoseMove(int whoseMove) {
+        this.whoseMove = whoseMove;
+    }
+
+    public String getXName() {
+        return this.xName;
+    }
+
+    public void setXName(String xName) {
+        this.xName = xName;
+    }
+    
+    public String getOName() {
+        return this.oName;
+    }
+
+    public void setOName(String oName) {
+        this.oName = oName;
+    }
+    
     public int getBoardCell(int row, int col) {
         return this.board[row][col];
     }
