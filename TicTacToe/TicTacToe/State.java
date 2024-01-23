@@ -48,7 +48,7 @@ public class State
         return true;
     }
 
-    public int getameState() {
+    public int getGameState() {
         return this.gameState;
     }
 
