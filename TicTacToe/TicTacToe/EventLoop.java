@@ -52,28 +52,41 @@ public class EventLoop {
                     if (state.getWhoseMove() == Constants.X) {
                         state.setGameState(Constants.X_WINS);
                     } else {
-                        state.setGameState(Constants.GET_X_MOVE);
+                        state.setGameState(Constants.O_WINS);
                     }
                 } else {
-                    state.setGameState(Constants.GET_O_MOVE);
+                    state.setGameState(Constants.CHECK_IF_TIE);
                 }
 
+            } else if (gameState == Constants.CHECK_IF_TIE) {
+                if (state.isTie()) {
+                    ui.printTieGame();
+                    state.setGameState(Constants.GAME_OVER);
+                } else {
+                    state.setWhoseMove(state.getWhoseMove() * -1);
+                    if (state.getWhoseMove() == Constants.X) {
+                        state.setGameState(Constants.GET_X_MOVE);
+                    } else {
+                        state.setGameState(Constants.GET_O_MOVE);
+                    }
+                }
+                
             } else if (gameState == Constants.X_WINS) {
                 ui.printWinner(state);
                 state.setGameState(Constants.GAME_OVER);
-
+                
             } else if (gameState == Constants.O_WINS) {
                 ui.printWinner(state);
                 state.setGameState(Constants.GAME_OVER);
-
+                
             } else if (gameState == Constants.GAME_OVER) {
                 if (ui.startNewGame()) {
-
                     state.setGameState(Constants.STANDBY);
                 } else {
                     state.setGameState(Constants.QUIT_PROGRAM);
                 }
             }
-        } 
+        }
     }
 }
+
