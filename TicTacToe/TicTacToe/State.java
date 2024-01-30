@@ -13,14 +13,14 @@ public class State
 
     public boolean isWinner() {
         int total;
-        for (int row=0; row < Constants.BOARD_SIZE; row++) {
-            total = this.getBoardCell (row,0) + this.getBoardCell (row,1) + this.getBoardCell (row,2);
+        for (int row = 0; row < Constants.BOARD_SIZE; row++) {
+            total = getBoardCell (row,0) + getBoardCell (row,1) + getBoardCell (row,2);
             if (total == -3 || total == 3) {
                 return true;
             }
         }
         for (int col=0; col < Constants.BOARD_SIZE; col++) {
-            total = this.getBoardCell (0,col) + this.getBoardCell (col,1) + this.getBoardCell (2,col);
+            total = getBoardCell (0,col) + getBoardCell (col,1) + getBoardCell (2,col);
             if (total == -3 || total == 3) {
                 return true;
             }
@@ -88,4 +88,8 @@ public class State
         this.board[row][col] = value;
     }
 
+    public void resetBoard() {
+        gameState= Constants.STANDBY;
+        board = new int[Constants.BOARD_SIZE][Constants.BOARD_SIZE];
+    }
 }

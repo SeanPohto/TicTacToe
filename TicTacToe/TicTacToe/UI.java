@@ -8,6 +8,7 @@ public class UI
 {
 
     Scanner scanner;
+    State state = new State();
 
     public UI() {
         scanner = new Scanner(System.in);         
@@ -41,16 +42,17 @@ public class UI
 
     public int getMoveRow(int whoseMove, String xName, String oName) {
         int row = 0;
-        while (row <= 0 || row >= 4) {
-            if (row < 0 || row > 3 ) {
-                System.out.println(Constants.INVALID_ROW_OR_COLUMN);
-            }    
+        while (row <= 0 || row >= 4) {    
             try {
                 System.out.printf(Constants.GET_ROW_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
                 row = scanner.nextInt();
             } catch (Exception e) {
                 System.out.println(Constants.INVALID_ROW_OR_COLUMN);
                 scanner.next();
+                continue;
+            }
+            if (row < 0 || row > 3 ) {
+                System.out.println(Constants.INVALID_ROW_OR_COLUMN);
             }
         }
         return row;
@@ -59,15 +61,16 @@ public class UI
     public int getMoveCol(int whoseMove, String xName, String oName) {
         int col = 0;
         while (col <= 0 || col >= 4) {
-            if (col < 0 || col > 3) {
-                System.out.println(Constants.INVALID_ROW_OR_COLUMN);
-            }
             try {
                 System.out.printf(Constants.GET_COL_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
                 col = scanner.nextInt();
             } catch (Exception e) {
                 System.out.println(Constants.INVALID_ROW_OR_COLUMN);
                 scanner.next();
+                continue; 
+            }
+            if (col < 0 || col > 3) {
+                System.out.println(Constants.INVALID_ROW_OR_COLUMN);
             }
         }
         return col;
@@ -76,7 +79,12 @@ public class UI
     public boolean startNewGame() {
         System.out.println(Constants.START_NEW_GAME);
         String yesOrNo = scanner.next();
-        return yesOrNo.equals("Y") || yesOrNo.equals("y");
+        if (yesOrNo.equals("Y") || yesOrNo.equals("y")) {
+            state.resetBoard();
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // Printing text methods
