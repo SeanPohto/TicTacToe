@@ -20,7 +20,7 @@ public class State
             }
         }
         for (int col=0; col < Constants.BOARD_SIZE; col++) {
-            total = getBoardCell (0,col) + getBoardCell (col,1) + getBoardCell (2,col);
+            total = getBoardCell (0,col) + getBoardCell (1,col) + getBoardCell (2,col);
             if (total == -3 || total == 3) {
                 return true;
             }
